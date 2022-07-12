@@ -3,7 +3,7 @@ package com.capgemini.main.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="flightsearch")
 public class Flight {
 	
 	@Id
@@ -62,12 +62,7 @@ public class Flight {
 	public void setReachesAtTime(String reachesAtTime) {
 		this.reachesAtTime = reachesAtTime;
 	}
-	@Override
-	public String toString() {
-		return "Flight [flightId=" + flightId + ", flightName=" + flightName + ", flightFrom=" + flightFrom
-				+ ", flightTo=" + flightTo + ", arrivesAtTime=" + arrivesAtTime + ", reachesAtTime=" + reachesAtTime
-				+ "]";
-	}
+	
 	
 	
 

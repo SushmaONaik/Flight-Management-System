@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.main.exception.NoDataFoundException;
 import com.capgemini.main.model.Booking;
 import com.capgemini.main.repository.BookFlightRepository;
 import com.capgemini.main.service.BookFlightService;
@@ -29,13 +30,14 @@ public class BookFlightServiceImpl implements BookFlightService{
 	}
 
 	@Override
-	public List<Booking> getFlightByBookingId(int bookingId) {
+	public List<Booking> getFlightByBookingId(int bookingId) throws NoDataFoundException {
 		Optional<Booking> findById = bookFlightRepository.findById(bookingId);
 		  if(findById.isPresent()) {
-			  return bookFlightRepository.findAll();
-		  }else
-			  System.out.println("booking not present");
-		return null;
+			  bookFlightRepository.findAll();
+		  }else {
+			  throw new NoDataFoundException("No data found on id given");
+		  }
+		return bookFlightRepository.findAll();
 	}
 
 }

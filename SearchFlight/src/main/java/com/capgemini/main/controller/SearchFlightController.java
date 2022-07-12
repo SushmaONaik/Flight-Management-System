@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.main.model.Flight;
 import com.capgemini.main.repository.SearchFlightRepository;
+import com.capgemini.main.serviceImpl.SearchFlightServiceImpl;
 
 @RestController
 @RequestMapping("/search")
 public class SearchFlightController {
 	
 	@Autowired
-	SearchFlightRepository searchFlightRepo;
+	SearchFlightServiceImpl searchFlightServiceImpl;
 	
 	@GetMapping("/flight/{flightFrom}/{flightTo}")
-	public List<Flight> getAllFlightByData(@RequestBody Flight flight,@PathVariable("flightFrom") String flightFrom,
+	public List<Flight> getAllFlightByData(@PathVariable("flightFrom") String flightFrom,
 			@PathVariable("flightTo") String flightTo){
 				
-		return searchFlightRepo.getAllFlightByData(flightFrom, flightTo);
+		return searchFlightServiceImpl.getAllFlightByData(flightFrom, flightTo);
 		
 	}
 
